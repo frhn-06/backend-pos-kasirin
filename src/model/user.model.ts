@@ -2,6 +2,8 @@ import mongoose, { Types } from 'mongoose';
 import * as yup from 'yup';
 import encrypt from '../utils/encrypt';
 import { truncateSync } from 'fs';
+import { renderHtml, sendMail } from '../utils/nodemailer/mail';
+import { CLIENT_HOST, MAIL_ME } from '../utils/env';
 
 
 const passwordYup = yup.string().min(3, "minimal 3 caracter").test("angka" , "password harus mengandung angka", (value) => {
@@ -32,7 +34,9 @@ interface IUser extends Omit<IRegisterForm, "confirmPassword"> {
     avatar: string | null;
     isActive: boolean;
     storeId: Types.ObjectId | null;
-    role: "admin" | "casher"
+    role: "admin" | "casher";
+    createdAt: string;
+    updatedAt: string;
 }
 
 const schema = mongoose.Schema;
@@ -88,6 +92,34 @@ schemaUser.pre("save", async function() {
     }
     if(this.isNew) {
         this.activationCode = encrypt(`${this._id}`)
+    }
+})
+
+
+
+schemaUser.post("save", async function(doc, next) {
+    try {
+        const user = doc;
+
+        const contentHtml = await renderHtml("activationMail.ejs", {
+            title: "pos cafe",
+            userName: user.userName,
+            fullName: user.fullName,
+            email: `${user.email}`,
+            tanggal: user.createdAt,
+            link: `${CLIENT_HOST}/auth/activation?code=${user.activationCode}`
+        })
+
+        await sendMail({
+            from: MAIL_ME,
+            to: user.email,
+            subject: "Aktivasi Akun",
+            html: contentHtml
+        })
+    } catch (error) {
+        console.log(error);
+    } finally {
+        next();
     }
 })
 

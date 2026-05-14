@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: 'arial';
+      }
+
+      .container {
+        background-color: #efefef;
+        width: 580px;
+        margin: auto;
+        min-height: 240px;
+      }
+
+      .header {
+        background-color: rgb(184, 136, 93);
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .header h1 {
+        color: white;
+        font-weight: bold;
+      }
+
+
+      .content {
+        padding: 4px 16px;
+      }
+
+      .content h1 {
+        font-size:x-large
+      }
+
+
+
+      .btn-aktivasi {
+        padding: 6px 12px;
+        border-radius: 20px;
+        background-color: rgb(184, 136, 93);
+        text-decoration: none;
+        font-size: large;
+        font-weight: bold;
+        color: aliceblue;
+      }
+
+
+
+
+
+      .footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ccc;
+      }
+
+      .footer {
+        font-size:small;
+      }
+
+
+      @media (max-width: 768px) {
+
+        .container {
+          width: 100%;
+          margin: 4px;
+        }
+      }
+    </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>
+        Pos Cafe
+      </h1>
+    </div>
+    <div class="content">
+      <h1>
+        Halo <%= userName %>
+      </h1>
+      <p>
+        Terimakasih telah mendaftar di layanan kami. Berikut adalah informasi dari akun anda:
+      </p>
+      <ul style="list-style: none;">
+        <li>
+          <b>Nama Lengkap: </b> <%= fullName %>
+        </li>
+        <li>
+          <b>Email: </b> <%= email %>
+        </li>
+        <li>
+          <b>Tanggal: </b> <%= tanggal %>
+        </li>
+      </ul>
+      <p>
+        Klik di bawah ini untuk mengaktivasi akun anda
+      </p>
+      <a href=<%= link %> class="btn-aktivasi">
+        Aktivasi Akun
+      </a>
+      <p>
+        Jika anda memiliki pertanyaan, jangan ragu untuk menghubungi kami.
+      </p>
+      <p>
+        <b>Salam Hangat, </b>
+      </p>
+    </div>
+    <div class="footer">
+      <p>
+        &copy; 2026 | farhan
+      </p>
+    </div>
+  </div>
+   
+</body>
+</html>
