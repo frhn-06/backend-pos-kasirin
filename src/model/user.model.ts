@@ -123,6 +123,11 @@ schemaUser.post("save", async function(doc, next) {
     }
 })
 
+schemaUser.methods.toJson = function() {
+    const user = this.toObject();
+    delete user.password;
+    return user
+}
 
 
 const ModelUser = mongoose.model("User", schemaUser);
