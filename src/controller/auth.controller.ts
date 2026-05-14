@@ -15,6 +15,35 @@ const authController = {
         } catch(error) {
             response.error(res, error, "failed to register")
         }
+    },
+
+    activation: async (req:Request, res:Response) => {
+        try {
+            const {code} = req.body;
+
+            if(!code) {
+                return response.error(res, "not found", "code is notfound")
+            }
+
+            const result = await ModelUser.findOneAndUpdate({
+                activationCode: code
+            }, {
+                isActive: true
+            }, {
+                new: true
+            });
+
+            if(!result) {
+                return response.notFound(res, "user is notfound")
+            }
+
+
+            response.success(res, result, "success to activation account");
+            
+
+        } catch (error) {
+            response.error(res, error, "failed to activation")
+        }
     }
 }
 
