@@ -4,7 +4,7 @@ import { SECRET } from './env';
 import { Types } from 'mongoose';
 import { Request } from 'express';
 
-interface IUserToken extends Omit<IUser, "userName"| "fullName" | "email" | "role" | "activationCode" | "password" | "isActive" | "avatar" | "createdAt" | "updatedAt" | "storeId"> {
+interface IUserToken extends Omit<IUser, "userName"| "fullName" | "email" | "activationCode" | "password" | "isActive" | "avatar" | "createdAt" | "updatedAt" | "storeId"> {
     id: Types.ObjectId;
 }
 

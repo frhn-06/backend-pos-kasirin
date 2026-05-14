@@ -80,7 +80,8 @@ const schemaUser = new schema<IUser>({
     },
     role: {
         type: schema.Types.String,
-        enum: ["admin", "casher"]
+        enum: ["admin", "casher"],
+        default: "admin"
     },
     storeId: {
         type: schema.Types.ObjectId,

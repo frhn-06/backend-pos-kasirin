@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import ModelUser, { IRegisterForm, LoginDTO, UserDTO } from "../model/user.model";
 import response from "../utils/response";
-import { signIn } from "../utils/jwt";
+import { IReqUser, signIn } from "../utils/jwt";
 import encrypt from "../utils/encrypt";
+import { isValidObjectId } from "mongoose";
 
 const authController = {
     register: async (req: Request, res: Response) => {
@@ -73,14 +74,31 @@ const authController = {
             if(!passwordMatch) return response.error(res, "password is wrong", "failed to login");
 
             const result = await signIn({
-                id: user._id
+                id: user._id,
+                role: user.role
             })
           
             response.success(res, result, "success to login");
         } catch(error) {
-            response.error(res, error, "failed to login")
+            response.error(res, error, "failed to login");
         }
-    } 
+    },
+
+    getMeByToken: async(req: IReqUser, res: Response) => {
+        try {
+            const userId = req.user?.id;
+
+            if(!isValidObjectId(userId)) return response.unauthorized(res);
+
+            const result = await ModelUser.findById(userId);
+
+            if(!result) return response.notFound(res, "akun tidak ada");
+
+            response.success(res, result, "sucess to get me");
+        } catch(error) {
+            response.error(res, error, "failed to get me");
+        }
+    }
 }
 
 export default authController;

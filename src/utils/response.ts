@@ -67,6 +67,15 @@ const response = {
                 message: message
             }
         })
+    },
+
+    unauthorized: (res:Response) => {
+        return res.status(403).json({
+            meta: {
+                status: 403,
+                message: "unauthorized"
+            }
+        })
     }
 }
 
