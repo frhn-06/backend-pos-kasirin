@@ -10,4 +10,6 @@ routerApi.post("/auth/register", authController.register);
 
 routerApi.post("/auth/activation", authController.activation);
 
+routerApi.post("/auth/login", authController.login);
+
 export default routerApi;

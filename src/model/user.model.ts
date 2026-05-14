@@ -26,6 +26,11 @@ export const UserDTO = yup.object({
     password: passwordYup,
     confirmPassword: confirmPassowrdYup
 });
+
+export const LoginDTO = yup.object({
+    identifier: yup.string().required(),
+    password: passwordYup,
+});
  
 export type IRegisterForm = yup.InferType<typeof UserDTO>;
 
@@ -38,6 +43,8 @@ interface IUser extends Omit<IRegisterForm, "confirmPassword"> {
     createdAt: string;
     updatedAt: string;
 }
+
+export type {IUser};
 
 const schema = mongoose.Schema;
 
