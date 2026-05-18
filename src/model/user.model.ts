@@ -39,7 +39,7 @@ interface IUser extends Omit<IRegisterForm, "confirmPassword"> {
     avatar: string | null;
     isActive: boolean;
     storeId: Types.ObjectId | null;
-    role: "admin" | "casher";
+    role: "owner" | "cashier";
     createdAt: string;
     updatedAt: string;
 }
@@ -80,8 +80,8 @@ const schemaUser = new schema<IUser>({
     },
     role: {
         type: schema.Types.String,
-        enum: ["admin", "casher"],
-        default: "admin"
+        enum: ["owner", "cashier"],
+        default: "owner"
     },
     storeId: {
         type: schema.Types.ObjectId,
@@ -131,7 +131,7 @@ schemaUser.post("save", async function(doc, next) {
     }
 })
 
-schemaUser.methods.toJson = function() {
+schemaUser.methods.toJSON = function() {
     const user = this.toObject();
     delete user.password;
     return user

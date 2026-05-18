@@ -3,7 +3,7 @@ import ModelUser, { IRegisterForm, LoginDTO, UserDTO } from "../model/user.model
 import response from "../utils/response";
 import { IReqUser, signIn } from "../utils/jwt";
 import encrypt from "../utils/encrypt";
-import { isValidObjectId } from "mongoose";
+import { isValidObjectId, Types } from "mongoose";
 
 const authController = {
     register: async (req: Request, res: Response) => {
@@ -87,7 +87,6 @@ const authController = {
     getMeByToken: async(req: IReqUser, res: Response) => {
         try {
             const userId = req.user?.id;
-
             if(!isValidObjectId(userId)) return response.unauthorized(res);
 
             const result = await ModelUser.findById(userId);
@@ -97,6 +96,33 @@ const authController = {
             response.success(res, result, "sucess to get me");
         } catch(error) {
             response.error(res, error, "failed to get me");
+        }
+    },
+
+    createUserCashier: async(req:IReqUser, res:Response) => {
+        try {
+            const userId = req.user?.id;
+            if(!isValidObjectId(userId)) return response.unauthorized(res);
+            
+            const user = await ModelUser.findById(userId);
+            if(!user?.storeId) return response.notFound(res, "store is not found");
+
+            const validate = await UserDTO.validate(req.body);
+
+            const payload = {
+                userName: validate.userName,
+                fullName: validate.fullName,
+                email: validate.email,
+                password: validate.password,
+                role: "cashier" as const,
+                storeId: user.storeId as Types.ObjectId
+            }
+
+            const result = await ModelUser.create(payload);
+
+            response.success(res, result, "success to create user cashier");
+        } catch(error) {
+            response.error(res, error, "failed to create user cashier");
         }
     }
 }

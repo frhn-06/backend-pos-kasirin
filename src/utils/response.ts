@@ -70,10 +70,19 @@ const response = {
     },
 
     unauthorized: (res:Response) => {
+        return res.status(401).json({
+            meta: {
+                status: 401,
+                message: "unauthorized"
+            }
+        })
+    },
+
+    forbidden: (res:Response) => {
         return res.status(403).json({
             meta: {
                 status: 403,
-                message: "unauthorized"
+                message: "forbidden"
             }
         })
     }

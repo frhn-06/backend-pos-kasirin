@@ -27,7 +27,6 @@ const schemaCategory = new schema<ICategory>({
     },
     slug: {
         type: schema.Types.String,
-        required: true,
     },
     img: {
         type: schema.Types.String,
