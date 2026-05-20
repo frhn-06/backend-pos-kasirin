@@ -32,7 +32,7 @@ const storeController = {
             let user = await ModelUser.findById(userId);
             if(!user) return response.notFound(res, "user not found");
             user.storeId = result._id;
-            user.save();
+            await user.save();
 
             response.success(res, result, "success to create store");
 
