@@ -29,10 +29,14 @@ const storeController = {
 
             const result = await ModelStore.create(payload);
 
-            let user = await ModelUser.findById(userId);
+            const user = await ModelUser.findByIdAndUpdate(userId, {
+                storeId: result._id
+            }, {
+                new: true
+            });
+            
             if(!user) return response.notFound(res, "user not found");
-            user.storeId = result._id;
-            await user.save();
+           
 
             response.success(res, result, "success to create store");
 
