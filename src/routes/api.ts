@@ -4,6 +4,7 @@ import authMiddleware from '../middleware/auth.middleware';
 import categoryController from '../controller/category.controller';
 import aclMiddleware from '../middleware/acl.middleware';
 import storeController from '../controller/store.controller';
+import productController from '../controller/product.controller';
 
 const routerApi = express.Router();
 
@@ -49,6 +50,23 @@ routerApi.post("/store", [authMiddleware, aclMiddleware(["owner"])], storeContro
 routerApi.get("/store", [authMiddleware], storeController.findStoreByUser);
 
 routerApi.put("/store/:storeId", [authMiddleware, aclMiddleware(["owner"])], storeController.update);
+
+
+
+
+
+
+
+
+routerApi.post("/product", [authMiddleware, aclMiddleware(["owner"])], productController.create);
+
+routerApi.get("/product", [authMiddleware], productController.findAll);
+
+routerApi.get("/product/:productId", [authMiddleware], productController.findOne);
+
+routerApi.put("/product/:productId", [authMiddleware, aclMiddleware(["owner"])], productController.update);
+
+routerApi.delete("/product/:productId", [authMiddleware, aclMiddleware(["owner"])], productController.remove);
 
 
 
