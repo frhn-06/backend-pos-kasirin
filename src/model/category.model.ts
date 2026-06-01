@@ -67,6 +67,8 @@ schemaCategory.pre("save", async function() {
 
 schemaCategory.index({slug: 1, storeId: 1}, {unique: true});
 
+schemaCategory.index({storeId: 1});
+
 const ModelCategory = mongoose.model("Category", schemaCategory);
 
 export default ModelCategory;
