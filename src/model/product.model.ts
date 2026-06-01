@@ -7,7 +7,8 @@ export const productDTO = yup.object({
     name: yup.string().required(),
     img: yup.string().required(),
     price: yup.number().required(),
-    categoryId: yup.string().required()
+    categoryId: yup.string().required(),
+    description: yup.string()
 });
 
  
@@ -17,6 +18,8 @@ interface IProduct extends Omit<IProductForm, "categoryId"> {
     categoryId: Types.ObjectId;
     storeId: Types.ObjectId;
     isAvailable: boolean;
+    isDeleted: boolean;
+    description: string;
 }
 
 export type {IProduct};
@@ -50,6 +53,14 @@ const schemaProduct = new schema<IProduct>({
         type: schema.Types.Boolean,
         default: true
     },
+    isDeleted: {
+        type: schema.Types.Boolean,
+        default: false
+    },
+    description: {
+        type: schema.Types.String,
+        default: ""
+    }
 },{
     timestamps: true
 });
@@ -58,7 +69,18 @@ schemaProduct.index({
     "name": "text"
 });
 
-schemaProduct.index({categoryId: 1, storeId: 1});
+
+schemaProduct.index(
+    {
+        storeId: 1,
+        name: 1
+    },
+    {
+        unique: true
+    }
+);
+
+schemaProduct.index({storeId: 1, categoryId: 1, isDeleted: 1});
 
 const ModelProduct = mongoose.model("Product", schemaProduct);
 

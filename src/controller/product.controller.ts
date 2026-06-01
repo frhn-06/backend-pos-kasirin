@@ -61,7 +61,8 @@ const productController = {
 
             const result = await ModelProduct.find({
                 ...query,
-                storeId: user.storeId
+                storeId: user.storeId,
+                isDeleted: false
             }).populate("categoryId", "name").limit(+limit).skip((+page - 1) * +limit).sort({name: 1}).exec();
 
             const totalProduct = await ModelProduct.countDocuments({
