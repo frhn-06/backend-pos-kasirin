@@ -1,4 +1,4 @@
-import { isValidObjectId, QueryFilter, Types } from "mongoose";
+import { isValidObjectId, ObjectId, QueryFilter, Types } from "mongoose";
 import { IReqUser } from "../utils/jwt";
 import {Response} from 'express'
 import response from "../utils/response";
@@ -60,8 +60,8 @@ const productController = {
             const query = setQuery({search, category});
 
             const result = await ModelProduct.find({
-                ...query,
                 storeId: user.storeId,
+                categoryId: Object(query.categoryId),
                 isDeleted: false
             }).populate("categoryId", "name").limit(+limit).skip((+page - 1) * +limit).sort({name: 1}).exec();
 
