@@ -7,6 +7,7 @@ import storeController from '../controller/store.controller';
 import productController from '../controller/product.controller';
 import mediaMiddleware from '../middleware/media.middleware';
 import mediaController from '../controller/media.controler';
+import orderController from '../controller/order.controller';
 
 const routerApi = express.Router();
 
@@ -76,5 +77,17 @@ routerApi.delete("/product/:productId", [authMiddleware, aclMiddleware(["owner"]
 routerApi.post("/media/upload-single", [authMiddleware, aclMiddleware(["owner"]), mediaMiddleware.single("file")], mediaController.uploadSingle);
 
 routerApi.delete("/media/remove-single", [authMiddleware, aclMiddleware(["owner"])], mediaController.removeSingle);
+
+
+
+
+
+routerApi.post("/order", [authMiddleware, aclMiddleware(["cashier"])], orderController.create);
+
+routerApi.get("/order", [authMiddleware, aclMiddleware(["owner", "cashier"])], orderController.findAllOrders);
+
+routerApi.get("/order/:orderId", [authMiddleware], orderController.findOneById);
+
+routerApi.patch("/order/:orderId/cancel", [authMiddleware], orderController.cancelled);
 
 export default routerApi;

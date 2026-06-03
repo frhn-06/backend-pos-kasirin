@@ -75,7 +75,8 @@ const authController = {
 
             const result = await signIn({
                 id: user._id,
-                role: user.role
+                role: user.role,
+                storeId: user.storeId
             })
           
             response.success(res, result, "success to login");
