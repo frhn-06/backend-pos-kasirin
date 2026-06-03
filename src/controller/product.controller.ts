@@ -40,7 +40,7 @@ const productController = {
             if(!user) return response.notFound(res, "user is not found");
             if(!user.storeId) return response.notFound(res, "store id of user is not found");
 
-            const {page = 1, limit = 10, search, category} = req.query as {page : string | number, limit: string | number; search: string, category: string}
+            const {page = 1, limit, search, category} = req.query as {page : string | number, limit: string | number; search: string, category: string}
 
             const setQuery = (params: Record<string, unknown>) => {
                 let query : QueryFilter<IProduct> = {} 
