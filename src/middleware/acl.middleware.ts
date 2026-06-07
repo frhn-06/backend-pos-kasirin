@@ -6,9 +6,6 @@ const aclMiddleware = (roles: string[]) => {
     return (req:IReqUser, res:Response, next: NextFunction) => {
         const userRole = req.user?.role;
 
-        console.log("roles : " + roles)
-        console.log("role : " + userRole)
-
         if(!userRole) {
             return response.unauthorized(res);
         }

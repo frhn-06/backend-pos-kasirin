@@ -105,24 +105,24 @@ const orderController = {
             const role = req.user?.role;
 
             interface TypeReqQuery {
-                page:string; limit: string; search: string; status: string; paymentMethod: string; cashierId: string; start: string; end: string;
+                page:string; limit: string; search: string; status: string; paymentmethod: string; cashierid: string; start: string; end: string;
             }
             
-            const {page, limit, search, status, paymentMethod, cashierId, start, end} = req.query as unknown as TypeReqQuery;
+            const {page, limit, search, status, paymentmethod, cashierid, start, end} = req.query as unknown as TypeReqQuery;
 
             const setQuery = (obj: TypeReqQuery) => {
                 let query : QueryFilter<IOrder> = {}
                 
                 if(role === "cashier") query.cashierId = userId;
 
-                if(role !== "cashier" && obj.cashierId) query.cashierId = obj.cashierId;
+                if(role !== "cashier" && obj.cashierid) query.cashierId = obj.cashierid;
 
                 if(obj.search) query.orderNumber = {
                     $regex: obj.search,
                     $options: "i"
                 };
                 
-                if(obj.paymentMethod) query.paymentMethod = obj.paymentMethod as any;
+                if(obj.paymentmethod) query.paymentMethod = obj.paymentmethod as any;
                 
                 if(obj.status) query.status = obj.status as any;
 
@@ -137,7 +137,7 @@ const orderController = {
                 return query;
             }
 
-            const query = setQuery({page, limit, search, status, paymentMethod, cashierId, start, end});
+            const query = setQuery({page, limit, search, status, paymentmethod, cashierid, start, end});
 
             const result = await ModelOrder.find({
                 ...query,
