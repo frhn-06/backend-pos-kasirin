@@ -58,7 +58,7 @@ const orderController = {
             let changeAmount = 0;
             
             if(validate.paymentMethod === "cash") {                
-                if(finalPaidAmount < totalAmount) throw new Error("payment is less than total price")
+                if(finalPaidAmount < totalAmount) return response.error(res, "payment is less than total price", "payment is less than total price")
                 
                 changeAmount = finalPaidAmount - totalAmount;
             } else {
