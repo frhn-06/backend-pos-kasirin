@@ -125,6 +125,25 @@ const authController = {
         } catch(error) {
             response.error(res, error, "failed to create user cashier");
         }
+    },
+
+    findUserCashier: async (req:IReqUser, res: Response) => {
+        try {
+            const storeId = req.user?.storeId;
+            if(!storeId) return response.notFound(res, "store is not found");
+
+            const result = await ModelUser.find({
+                storeId: storeId,
+                role: "cashier",
+                isActive: true
+            });
+
+            if(!result) return response.notFound(res, "user is not found");
+
+            response.success(res, result, "success to find user cashier");
+        } catch(error) {
+            response.error(res, error, "failed to find user cashier");
+        }
     }
 }
 

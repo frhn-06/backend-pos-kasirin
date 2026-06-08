@@ -24,6 +24,7 @@ routerApi.get("/auth/me", [authMiddleware], authController.getMeByToken);
 
 routerApi.post("/auth/create-user", [authMiddleware, aclMiddleware(["owner"])], authController.createUserCashier);
 
+routerApi.get("/user/:storeId/cashier", [authMiddleware, aclMiddleware(["owner"])], authController.findUserCashier);
 
 
 
