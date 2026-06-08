@@ -142,7 +142,7 @@ const orderController = {
             const result = await ModelOrder.find({
                 ...query,
                 storeId: storeId
-            }).populate("cashierId", "name").limit(+limit).skip((+page - 1) * +limit).sort({createdAt: -1}).exec();
+            }).populate("cashierId", "fullName").limit(+limit).skip((+page - 1) * +limit).sort({createdAt: -1}).exec();
 
             const totalOrder = await ModelOrder.countDocuments({
                 ...query,
