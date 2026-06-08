@@ -224,7 +224,38 @@ const orderController = {
 
             response.success(res, result, "success to cancel order");
         }catch(error) {
-            return response.error(res, error, "failed to find one order");
+            return response.error(res, error, "failed to cancel order");
+        }
+    },
+
+    uncancel : async(req: IReqUser, res: Response) => {
+        try {
+            const userId = req.user?.id;
+            if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user is not found");
+
+            const {orderId} = req.params;
+            if(!isValidObjectId(orderId)) return response.notFound(res, "order is not found");
+
+            const storeId = req.user?.storeId;
+            if(!storeId) return response.notFound(res, "store is not found");
+
+            const query : QueryFilter<IOrder> = {
+                _id: orderId,
+                status: "cancelled",
+                storeId: storeId
+            }
+
+            const result = await ModelOrder.findOneAndUpdate(query, {
+                status: "paid"
+            }, {
+                new: true
+            });
+
+            if(!result) return response.notFound(res, "order is not found");
+
+            response.success(res, result, "success to un cancel order");
+        }catch(error) {
+            return response.error(res, error, "failed to un cancel order");
         }
     }
 } 

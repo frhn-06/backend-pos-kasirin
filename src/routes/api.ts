@@ -90,4 +90,6 @@ routerApi.get("/order/:orderId", [authMiddleware], orderController.findOneById);
 
 routerApi.patch("/order/:orderId/cancel", [authMiddleware], orderController.cancelled);
 
+routerApi.patch("/order/:orderId/uncancel", [authMiddleware, aclMiddleware(["owner"])], orderController.uncancel);
+
 export default routerApi;
