@@ -37,6 +37,14 @@ interface IOrder extends Omit<IOrderForm, "items" | "paymentMethod"> {
         subTotal: number;
     }[];
     paymentMethod: "cash" | "qris" | "transfer";
+    storeSnapshot : {
+        name: string;
+        address: string;
+        phone: string;
+    };
+    cashierSnapshot : {
+        name: string;
+    };
     totalAmount: number;
     changeAmount: number;
     cashierId: Types.ObjectId;
@@ -77,6 +85,24 @@ const orderSchema = new schema<IOrder>({
     },
     paidAmount: {
         type: schema.Types.Number,
+        required: true
+    },
+    storeSnapshot: {
+        name: {
+            type: schema.Types.String,
+            required: true
+        },
+        address: {
+            type: schema.Types.String,
+            required: true
+        },
+        phone: {
+            type: schema.Types.String,
+            required: true
+        }
+    },
+    cashierSnapshot: {
+        name: schema.Types.String,
         required: true
     },
     totalAmount: {

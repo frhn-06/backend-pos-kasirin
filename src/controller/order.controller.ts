@@ -6,6 +6,8 @@ import ModelProduct from "../model/product.model";
 import { isValidObjectId, QueryFilter } from "mongoose";
 import convert from "../utils/convert";
 import { object } from "yup";
+import ModelStore from "../model/store.model";
+import ModelUser from "../model/user.model";
 
 const orderController = {
     create: async(req:IReqUser, res:Response) => {
@@ -27,7 +29,7 @@ const orderController = {
                 }
             });
 
-            // bikin map prodcut untuk payload.items
+            // bikin map prodcut untuk field items
             const productMap = new Map(
                 products.map((product) => {
                     return [product._id.toString(), product]
@@ -35,7 +37,7 @@ const orderController = {
             )
 
 
-            // bikin payload.items
+            // bikin field items
             const orderItems = validate.items.map((item) => {
                 const product = productMap.get(item.productId);
 
@@ -50,10 +52,12 @@ const orderController = {
                 }
             });
 
+            // bikin field totalAmount
             const totalAmount = orderItems.reduce((sum, item) => {
                 return sum + item.subTotal;
             }, 0);
 
+            // bikin field changeAmount
             let finalPaidAmount = validate.paidAmount;
             let changeAmount = 0;
             
@@ -65,18 +69,41 @@ const orderController = {
                 finalPaidAmount = totalAmount
             }
             
+            // bikin field cashierId
             const cashierId = userId;
 
+            // bikin field cashierSnapshot
+            const cashier = await ModelUser.findById(cashierId);
+            if(!cashier) return response.notFound(res,"cashier not found");
+
+            const cashierSnapshot = {
+                name: cashier.fullName
+            }
+
+            // nikin field storeId
             const storeId = req.user?.storeId
             if(!storeId) return response.notFound(res,"store not found");
-                
+
+            // bikin field storeSnapshot
+            const store = await ModelStore.findById(storeId);
+            if(!store) return response.notFound(res,"store not found");
+            const storeSnapshot = {
+                name: store.name,
+                address: store.address,
+                phone: store.phone
+            }
+            
+            // bikin field orderNumber
             const orderNumber = convert.generateOrderNum();
+
             
 
             const payload = {
                 items: orderItems,
                 paymentMethod: validate.paymentMethod,
                 paidAmount: finalPaidAmount,
+                storeSnapshot: storeSnapshot,
+                cashierSnapshot: cashierSnapshot,
                 totalAmount: totalAmount,
                 changeAmount: changeAmount,
                 cashierId: cashierId,
@@ -142,7 +169,7 @@ const orderController = {
             const result = await ModelOrder.find({
                 ...query,
                 storeId: storeId
-            }).populate("cashierId", "fullName").limit(+limit).skip((+page - 1) * +limit).sort({createdAt: -1}).exec();
+            }).limit(+limit).skip((+page - 1) * +limit).sort({createdAt: -1}).exec();
 
             const totalOrder = await ModelOrder.countDocuments({
                 ...query,
