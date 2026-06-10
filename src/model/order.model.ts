@@ -102,8 +102,10 @@ const orderSchema = new schema<IOrder>({
         }
     },
     cashierSnapshot: {
-        name: schema.Types.String,
-        required: true
+        name: {
+            type: schema.Types.String,
+            required: true
+        }
     },
     totalAmount: {
         type: schema.Types.Number,
