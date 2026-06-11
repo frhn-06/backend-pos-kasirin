@@ -89,6 +89,7 @@ const orderController = {
             if(!store) return response.notFound(res,"store not found");
             const storeSnapshot = {
                 name: store.name,
+                order: store.logo || "",
                 address: store.address,
                 phone: store.phone
             }
