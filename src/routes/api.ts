@@ -8,6 +8,7 @@ import productController from '../controller/product.controller';
 import mediaMiddleware from '../middleware/media.middleware';
 import mediaController from '../controller/media.controler';
 import orderController from '../controller/order.controller';
+import dashboardController from '../controller/dashboard.controller';
 
 const routerApi = express.Router();
 
@@ -92,5 +93,17 @@ routerApi.get("/order/:orderId", [authMiddleware], orderController.findOneById);
 routerApi.patch("/order/:orderId/cancel", [authMiddleware], orderController.cancelled);
 
 routerApi.patch("/order/:orderId/uncancel", [authMiddleware, aclMiddleware(["owner"])], orderController.uncancel);
+
+
+
+
+
+routerApi.get("/dashboard/summary", [authMiddleware, aclMiddleware(["owner"])], dashboardController.summary);
+
+routerApi.get("/dashboard/sales-trend", [authMiddleware, aclMiddleware(["owner"])], dashboardController.salesTrend);
+
+routerApi.get("/dashboard/top-products", [authMiddleware, aclMiddleware(["owner"])], dashboardController.topProducts);
+
+routerApi.get("/dashboard/last-orders", [authMiddleware, aclMiddleware(["owner"])], dashboardController.lastOrders);
 
 export default routerApi;
