@@ -190,7 +190,7 @@ const dashboardController = {
                             $sum: "$items.qty" 
                         },
                         priceProduct: {
-                            $first: Number("$items.price")
+                            $first: "$items.price"
                         }
                     }
                 },
