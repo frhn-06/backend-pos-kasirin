@@ -115,7 +115,7 @@ const dashboardController = {
             if(!storeId || !isValidObjectId(storeId)) return response.notFound(res, "store is not found");
 
             const semingguYgLalu = new Date();
-            semingguYgLalu.setDate(semingguYgLalu.getDate() - 7);
+            semingguYgLalu.setDate(semingguYgLalu.getDate() - 8);
 
             const result = await ModelOrder.aggregate([
                 {
