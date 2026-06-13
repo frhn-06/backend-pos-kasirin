@@ -132,7 +132,8 @@ const dashboardController = {
                         _id: {
                             $dateToString: {
                                 date: "$createdAt",
-                                format: "%Y-%m-%d"
+                                format: "%Y-%m-%d",
+                                timezone: "Asia/Jakarta"
                             }
                         },
                         totalSales: {
