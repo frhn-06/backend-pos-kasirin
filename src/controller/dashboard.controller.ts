@@ -203,7 +203,8 @@ const dashboardController = {
                     $project: {
                         _id: 0,
                         productName: "$_id",
-                        totalSold: "$totalQty"
+                        totalSold: "$totalQty",
+                        price: "$items.price"
                     }
                 }
             ])
