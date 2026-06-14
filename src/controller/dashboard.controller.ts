@@ -174,7 +174,7 @@ const dashboardController = {
     
     
     
-    topProducts: async(req:IReqUser, res: Response) => {
+    OwnertopProducts: async(req:IReqUser, res: Response) => {
         try {
             const userId = req.user?.id;
             const storeId = req.user?.storeId;
@@ -470,6 +470,9 @@ const dashboardController = {
                         _id: "$items.productName",
                         qtyProduct: {
                             $sum: "$items.qty"
+                        },
+                        priceProduct: {
+                            $first: "$items.price"
                         }
                     }
                 },
@@ -485,7 +488,8 @@ const dashboardController = {
                     $project: {
                         _id: 0,
                         productName: "$_id",
-                        totalSold: "$qtyProduct"
+                        totalSold: "$qtyProduct",
+                        price: "$priceProduct"
                     }
                 }
             ]);

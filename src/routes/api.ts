@@ -102,7 +102,7 @@ routerApi.get("/dashboard/owner-summary", [authMiddleware, aclMiddleware(["owner
 
 routerApi.get("/dashboard/sales-trend", [authMiddleware, aclMiddleware(["owner"])], dashboardController.salesTrend);
 
-routerApi.get("/dashboard/owner-top-products", [authMiddleware, aclMiddleware(["owner"])], dashboardController.topProducts);
+routerApi.get("/dashboard/owner-top-products", [authMiddleware, aclMiddleware(["owner"])], dashboardController.OwnertopProducts);
 
 routerApi.get("/dashboard/owner-last-orders", [authMiddleware, aclMiddleware(["owner"])], dashboardController.OwnerlastOrders);
 
