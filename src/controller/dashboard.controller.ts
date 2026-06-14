@@ -23,6 +23,10 @@ const dashboardController = {
             today.setHours(0, 0, 0, 0);
             tomorrow.setHours(23, 59, 59, 999);
 
+            console.log(
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+);
+
             const totalPemasukanToday = await ModelOrder.aggregate([
                 {
                     $match: {
