@@ -20,10 +20,12 @@ const dashboardController = {
             const store = await ModelStore.findById(storeId);
             if(!store) return response.notFound(res, "store is not found");
 
+            // untuk mengatur batas hari awal mengikuti timezone UTC
             const today = new Date()
-            today.setUTCHours(0, 0, 0, 0);
+            today.setUTCHours(17, 0, 0, 0);
             today.setUTCDate(today.getUTCDate() - 1);
             
+            // untuk mengatur batas hari akhir mengikuti timezone UTC
             const tomorrow = new Date();
             tomorrow.setUTCHours(16, 59, 59, 999);
 
