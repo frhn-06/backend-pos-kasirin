@@ -7,7 +7,8 @@ export const storeDTO = yup.object({
     name: yup.string().required(),
     address: yup.string().required(),
     phone: yup.string().required(),
-    description: yup.string()
+    description: yup.string(),
+    timeZone: yup.string()
 });
 
  
@@ -48,6 +49,10 @@ const schemaStore = new schema<IStore>({
     description: {
         type: schema.Types.String,
         default: ""
+    },
+    timeZone: {
+        type: schema.Types.String,
+        default: "Asia/Jakarta"
     },
     ownerId: {
         type: schema.Types.ObjectId,
