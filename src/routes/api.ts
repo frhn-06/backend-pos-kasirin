@@ -98,12 +98,22 @@ routerApi.patch("/order/:orderId/uncancel", [authMiddleware, aclMiddleware(["own
 
 
 
-routerApi.get("/dashboard/summary", [authMiddleware, aclMiddleware(["owner"])], dashboardController.summary);
+routerApi.get("/dashboard/owner-summary", [authMiddleware, aclMiddleware(["owner"])], dashboardController.OwnerSummary);
 
 routerApi.get("/dashboard/sales-trend", [authMiddleware, aclMiddleware(["owner"])], dashboardController.salesTrend);
 
-routerApi.get("/dashboard/top-products", [authMiddleware, aclMiddleware(["owner"])], dashboardController.topProducts);
+routerApi.get("/dashboard/owner-top-products", [authMiddleware, aclMiddleware(["owner"])], dashboardController.topProducts);
 
-routerApi.get("/dashboard/last-orders", [authMiddleware, aclMiddleware(["owner"])], dashboardController.lastOrders);
+routerApi.get("/dashboard/owner-last-orders", [authMiddleware, aclMiddleware(["owner"])], dashboardController.OwnerlastOrders);
+
+
+
+routerApi.get("/dashboard/cashier-summary", [authMiddleware, aclMiddleware(["cashier", "owner"])], dashboardController.CashierSummary);
+
+routerApi.get("/dashboard/cashier-last-orders", [authMiddleware, aclMiddleware(["cashier", "owner"])], dashboardController.CashierLastOrder);
+
+routerApi.get("/dashboard/payment-summary", [authMiddleware, aclMiddleware(["cashier", "owner"])], dashboardController.CashierPaymentSummary);
+
+routerApi.get("/dashboard/cashier-top-products", [authMiddleware, aclMiddleware(["cashier", "owner"])], dashboardController.CashierTopProducts);
 
 export default routerApi;
