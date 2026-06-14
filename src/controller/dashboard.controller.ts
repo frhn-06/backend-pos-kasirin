@@ -20,23 +20,13 @@ const dashboardController = {
             const store = await ModelStore.findById(storeId);
             if(!store) return response.notFound(res, "store is not found");
 
-            const now = new Date();
-
-            const jakartaNow = new Date(now.toLocaleString("en-US", {
-                timeZone: store.timeZone
-            }))
-
+            const today = new Date()
+            today.setUTCHours(0, 0, 0, 0);
+            today.setUTCDate(today.getUTCDate() - 1);
             
+            const tomorrow = new Date();
+            tomorrow.setUTCHours(16, 59, 59, 999);
 
-            const today = new Date(jakartaNow)
-            today.setHours(0, 0, 0, 0);
-            
-            const tomorrow = new Date(jakartaNow);
-            tomorrow.setHours(23, 59, 59, 999);
-
-            console.log("now ", jakartaNow);
-            console.log("today ", today)
-            console.log("tomorrow ", tomorrow)
 
             const totalPemasukanToday = await ModelOrder.aggregate([
                 {
