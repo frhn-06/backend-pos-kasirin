@@ -4,6 +4,7 @@ import response from "../utils/response";
 import { isValidObjectId, ObjectId, Types } from "mongoose";
 import ModelOrder from "../model/order.model";
 import ModelProduct from "../model/product.model";
+import ModelStore from "../model/store.model";
 
 
 
@@ -16,16 +17,24 @@ const dashboardController = {
             if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user is not found");
             if(!storeId || !isValidObjectId(storeId)) return response.notFound(res, "store is not found");
 
+            const store = await ModelStore.findById(storeId);
+            if(!store) return response.notFound(res, "store is not found");
 
-            const today = new Date();
-            const tomorrow = new Date();
+            const now = new Date();
 
+            const jakartaNow = new Date(now.toLocaleString("en-US", {
+                timeZone: store.timeZone
+            }))
+
+            const today = new Date(jakartaNow)
             today.setHours(0, 0, 0, 0);
+            
+            const tomorrow = new Date(jakartaNow);
             tomorrow.setHours(23, 59, 59, 999);
 
-            console.log(
-    Intl.DateTimeFormat().resolvedOptions().timeZone
-);
+            
+            console.log("today ", today)
+            console.log("tomorrow ", tomorrow)
 
             const totalPemasukanToday = await ModelOrder.aggregate([
                 {
