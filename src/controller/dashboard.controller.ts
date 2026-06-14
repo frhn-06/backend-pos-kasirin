@@ -26,13 +26,15 @@ const dashboardController = {
                 timeZone: store.timeZone
             }))
 
+            
+
             const today = new Date(jakartaNow)
             today.setHours(0, 0, 0, 0);
             
             const tomorrow = new Date(jakartaNow);
             tomorrow.setHours(23, 59, 59, 999);
 
-            
+            console.log("now ", jakartaNow);
             console.log("today ", today)
             console.log("tomorrow ", tomorrow)
 
