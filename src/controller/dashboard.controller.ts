@@ -5,6 +5,7 @@ import { isValidObjectId, ObjectId, Types } from "mongoose";
 import ModelOrder from "../model/order.model";
 import ModelProduct from "../model/product.model";
 import ModelStore from "../model/store.model";
+import { match } from "assert";
 
 
 
@@ -426,9 +427,22 @@ const dashboardController = {
                         total: "$totalAmount"
                     }
                 }
-            ])
+            ]);
 
-            response.success(res, result, "success  to get cashier payment summary");
+
+            const totalDaritotal = result.reduce((sum, data) => {
+                return sum + data.total;
+            },0);
+
+            const resultAkhir = result.map((data) => {
+                return {
+                    ...data,
+                    percentage: totalDaritotal > 0 ? ((data.total / totalDaritotal) * 100).toFixed() : 0
+                }
+            });
+
+
+            response.success(res, resultAkhir, "success  to get cashier payment summary");
 
         } catch(error) {
             response.error(res, error, "failed to get cashier payment summary")
