@@ -9,6 +9,7 @@ import mediaMiddleware from '../middleware/media.middleware';
 import mediaController from '../controller/media.controler';
 import orderController from '../controller/order.controller';
 import dashboardController from '../controller/dashboard.controller';
+import reportController from '../controller/report.controller';
 
 const routerApi = express.Router();
 
@@ -115,5 +116,16 @@ routerApi.get("/dashboard/cashier-last-orders", [authMiddleware, aclMiddleware([
 routerApi.get("/dashboard/payment-summary", [authMiddleware, aclMiddleware(["cashier", "owner"])], dashboardController.CashierPaymentSummary);
 
 routerApi.get("/dashboard/cashier-top-products", [authMiddleware, aclMiddleware(["cashier", "owner"])], dashboardController.CashierTopProducts);
+
+
+
+
+
+
+
+routerApi.get("/report/sales", reportController.sales);
+
+
+
 
 export default routerApi;

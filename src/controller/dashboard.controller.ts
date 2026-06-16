@@ -24,12 +24,16 @@ const dashboardController = {
             // untuk mengatur batas hari awal mengikuti timezone UTC
             const today = new Date()
             today.setUTCHours(17, 0, 0, 0);
-            today.setUTCDate(today.getUTCDate() - 1);
             
             // untuk mengatur batas hari akhir mengikuti timezone UTC
             const tomorrow = new Date();
             tomorrow.setUTCHours(16, 59, 59, 999);
+            tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+          
 
+            console.log(new Date());
+            console.log(today);
+            console.log(tomorrow)
 
             const totalPemasukanToday = await ModelOrder.aggregate([
                 {
