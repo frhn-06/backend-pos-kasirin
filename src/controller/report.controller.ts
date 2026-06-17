@@ -3,35 +3,41 @@ import { IReqUser } from "../utils/jwt";
 import response from "../utils/response";
 import { isValidObjectId, Types } from "mongoose";
 import ModelOrder from "../model/order.model";
+import { rangeWIBUTC } from "../utils/todayrangewib";
 
 const reportController = {
     sales: async(req:IReqUser, res:Response) => {
         try {
-            // const userId = req.user?.id;
+            const userId = req.user?.id;
             const storeId = req.user?.storeId;
-            // if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user is not found");
+            if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user is not found");
             if(!storeId || !isValidObjectId(storeId)) return response.notFound(res, "store is not found"); 
 
             const {start, end} = req.query as {start: string; end: string};
 
-            const startDate = new Date(start);
-            const endDate = new Date(end);
+            const startDateWIB = start ? rangeWIBUTC.start(start) : "";
 
-            startDate?.setUTCHours(17, 0, 0, 0);
+            const endDateWIB = end ? rangeWIBUTC.end(end) : "";
 
-            endDate?.setUTCHours(16, 59, 59, 999);
-            endDate?.setUTCDate(endDate.getUTCDate() - 1);
+            const createdAtFilter : any = {}
+
+            if(startDateWIB !== "") createdAtFilter.$gte = startDateWIB;
+
+            if(endDateWIB !== "") createdAtFilter.$lte = endDateWIB;
+
+
+            const matchFilter: any = {
+                storeId: new Types.ObjectId(storeId),
+                status: "paid"
+            }
+
+            if(Object.keys(createdAtFilter).length > 0) {
+                matchFilter.createdAt = createdAtFilter;
+            }
 
             const totalSales = await ModelOrder.aggregate([
                 {
-                    $match: {
-                        storeId: new Types.ObjectId(storeId),
-                        createdAt: {
-                            $gte: startDate? startDate : "",
-                            $lte: endDate? endDate : ""
-                        },
-                        status: "paid"
-                    }
+                    $match: matchFilter
                 },
                 {
                     $group: {
@@ -45,14 +51,7 @@ const reportController = {
 
             const totalOrders = await ModelOrder.aggregate([
                 {
-                    $match: {
-                        storeId: new Types.ObjectId(storeId),
-                        createdAt: {
-                            $gte: startDate? startDate : "",
-                            $lte: endDate? endDate : ""
-                        },
-                        status: "paid"
-                    }
+                    $match: matchFilter
                 },
                 {
                     $count: "totalOrders"
@@ -61,14 +60,7 @@ const reportController = {
 
             const averegeOrderValue = await ModelOrder.aggregate([
                 {
-                    $match: {
-                        storeId: new Types.ObjectId(storeId),
-                        createdAt: {
-                            $gte: startDate? startDate : "",
-                            $lte: endDate? endDate : ""
-                        },
-                        status: "paid"
-                    }
+                    $match: matchFilter
                 },
                 {
                     $group : {
@@ -82,22 +74,15 @@ const reportController = {
 
             const salesByDay = await ModelOrder.aggregate([
                 {
-                    $match: {
-                        storeId: new Types.ObjectId(storeId),
-                        createdAt: {
-                            $gte: startDate? startDate : "",
-                            $lte: endDate? endDate : ""
-                        },
-                        status: "paid"
-                    }
+                    $match: matchFilter
                 },
                 {
                     $group: {
                         _id: {
                             $dateToString : {
-                                $date: "$createdAt",
-                                $format: "%Y-%m-%d",
-                                $timezone: "Asia/Jakarta"
+                                date: "$createdAt",
+                                format: "%Y-%m-%d",
+                                timezone: "Asia/Jakarta"
                             }
                         },
                         totalSales: {

@@ -123,7 +123,7 @@ routerApi.get("/dashboard/cashier-top-products", [authMiddleware, aclMiddleware(
 
 
 
-routerApi.get("/report/sales", reportController.sales);
+routerApi.get("/report/sales", [authMiddleware, aclMiddleware(["owner"])], reportController.sales);
 
 
 
