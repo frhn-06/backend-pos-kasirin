@@ -22,18 +22,43 @@ const dashboardController = {
             if(!store) return response.notFound(res, "store is not found");
 
             // untuk mengatur batas hari awal mengikuti timezone UTC
-            const today = new Date()
-            today.setUTCHours(17, 0, 0, 0);
+            // const today = new Date()
+            // today.setUTCHours(17, 0, 0, 0);
             
             // untuk mengatur batas hari akhir mengikuti timezone UTC
-            const tomorrow = new Date();
-            tomorrow.setUTCHours(16, 59, 59, 999);
-            tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+            // const tomorrow = new Date();
+            // tomorrow.setUTCHours(16, 59, 59, 999);
+            // tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
           
 
-            console.log(new Date());
-            console.log(today);
-            console.log(tomorrow)
+            // console.log(new Date());
+            // console.log(today);
+            // console.log(tomorrow)
+
+            // const now = new Date("2026-06-17T01:26:37.354Z");
+            // const nowDay = new Date("2026-06-17T01:26:37.354Z");
+            // const hariIni = new Date("2026-06-17T01:26:37.354Z");
+            // const besok = new Date("2026-06-17T01:26:37.354Z");
+            // nowDay.setUTCHours(0, 0, 0, 0)
+            // hariIni.setHours(0, 0, 0, 0)
+            // besok.setHours(23, 59, 59, 999);
+            // // besok.setDate(besok.getDate() - 1);
+            // console.log("now ", now);
+            // console.log("today ", nowDay);
+            // console.log("hari ini ", hariIni);
+            // console.log("besok ", besok)
+
+
+
+            const today = new Date();
+            const tomorrow = new Date();
+            today.setHours(0, 0, 0, 0);
+            tomorrow.setHours(23, 59,59,999);
+
+            console.log("now ", new Date());
+            console.log("start ", today);
+            console.log("end ", tomorrow);
+
 
             const totalPemasukanToday = await ModelOrder.aggregate([
                 {
