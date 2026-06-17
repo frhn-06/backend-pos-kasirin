@@ -6,6 +6,7 @@ import ModelOrder from "../model/order.model";
 import ModelProduct from "../model/product.model";
 import ModelStore from "../model/store.model";
 import { match } from "assert";
+import todayRangeWIB from "../utils/todayrangewib";
 
 
 
@@ -50,23 +51,27 @@ const dashboardController = {
 
 
 
-            const today = new Date();
-            const tomorrow = new Date();
-            today.setHours(0, 0, 0, 0);
-            tomorrow.setHours(23, 59,59,999);
+            // const today = new Date();
+            // const tomorrow = new Date();
+            // today.setHours(0, 0, 0, 0);
+            // tomorrow.setHours(23, 59,59,999);
 
-            console.log("now ", new Date());
-            console.log("start ", today);
-            console.log("end ", tomorrow);
+            // console.log("now ", new Date());
+            // console.log("start ", today);
+            // console.log("end ", tomorrow);
 
+            const {start, end} = todayRangeWIB();
+
+            console.log("start ", start);
+            console.log("end ", end);
 
             const totalPemasukanToday = await ModelOrder.aggregate([
                 {
                     $match: {
                         storeId: new Types.ObjectId(storeId),
                         createdAt: {
-                            $gte: today,
-                            $lte: tomorrow
+                            $gte: start,
+                            $lte: end
                         },
                         status: "paid"
                     },
@@ -87,8 +92,8 @@ const dashboardController = {
                     $match: {
                         storeId: new Types.ObjectId(storeId),
                         createdAt: {
-                            $gte: today,
-                            $lte: tomorrow
+                            $gte: start,
+                            $lte: end
                         },
                         status: "paid"
                     }
@@ -103,8 +108,8 @@ const dashboardController = {
                     $match: {
                         storeId: new Types.ObjectId(storeId),
                         createdAt: {
-                            $gte: today,
-                            $lte: tomorrow
+                            $gte: start,
+                            $lte: end
                         },
                         status: "paid"
                     }
