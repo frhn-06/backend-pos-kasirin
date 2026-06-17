@@ -22,48 +22,7 @@ const dashboardController = {
             const store = await ModelStore.findById(storeId);
             if(!store) return response.notFound(res, "store is not found");
 
-            // untuk mengatur batas hari awal mengikuti timezone UTC
-            // const today = new Date()
-            // today.setUTCHours(17, 0, 0, 0);
-            
-            // untuk mengatur batas hari akhir mengikuti timezone UTC
-            // const tomorrow = new Date();
-            // tomorrow.setUTCHours(16, 59, 59, 999);
-            // tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
-          
-
-            // console.log(new Date());
-            // console.log(today);
-            // console.log(tomorrow)
-
-            // const now = new Date("2026-06-17T01:26:37.354Z");
-            // const nowDay = new Date("2026-06-17T01:26:37.354Z");
-            // const hariIni = new Date("2026-06-17T01:26:37.354Z");
-            // const besok = new Date("2026-06-17T01:26:37.354Z");
-            // nowDay.setUTCHours(0, 0, 0, 0)
-            // hariIni.setHours(0, 0, 0, 0)
-            // besok.setHours(23, 59, 59, 999);
-            // // besok.setDate(besok.getDate() - 1);
-            // console.log("now ", now);
-            // console.log("today ", nowDay);
-            // console.log("hari ini ", hariIni);
-            // console.log("besok ", besok)
-
-
-
-            // const today = new Date();
-            // const tomorrow = new Date();
-            // today.setHours(0, 0, 0, 0);
-            // tomorrow.setHours(23, 59,59,999);
-
-            // console.log("now ", new Date());
-            // console.log("start ", today);
-            // console.log("end ", tomorrow);
-
             const {start, end} = todayRangeWIB();
-
-            console.log("start ", start);
-            console.log("end ", end);
 
             const totalPemasukanToday = await ModelOrder.aggregate([
                 {
@@ -306,14 +265,7 @@ const dashboardController = {
             if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user is not found");
             if(!storeId || !isValidObjectId(storeId)) return response.notFound(res, "store is not found");
 
-            // untuk mengatur batas hari awal mengikuti timezone UTC
-            const today = new Date()
-            today.setUTCHours(17, 0, 0, 0);
-            today.setUTCDate(today.getUTCDate() - 1);
-            
-            // untuk mengatur batas hari akhir mengikuti timezone UTC
-            const tomorrow = new Date();
-            tomorrow.setUTCHours(16, 59, 59, 999);
+            const {start, end} = todayRangeWIB();
 
 
             const totalPemasukanToday = await ModelOrder.aggregate([
@@ -321,8 +273,8 @@ const dashboardController = {
                     $match: {
                         storeId: new Types.ObjectId(storeId),
                         createdAt: {
-                            $gte: today,
-                            $lte: tomorrow
+                            $gte: start,
+                            $lte: end
                         },
                         status: "paid",
                         cashierId: new Types.ObjectId(userId)
@@ -343,8 +295,8 @@ const dashboardController = {
                     $match: {
                         storeId: new Types.ObjectId(storeId),
                         createdAt: {
-                            $gte: today,
-                            $lte: tomorrow
+                            $gte: start,
+                            $lte: end
                         },
                         status: "paid",
                         cashierId: new Types.ObjectId(userId)
@@ -360,8 +312,8 @@ const dashboardController = {
                     $match: {
                         storeId: new Types.ObjectId(storeId),
                         createdAt: {
-                            $gte: today,
-                            $lte: tomorrow
+                            $gte: start,
+                            $lte: end
                         },
                         status: "paid",
                         cashierId: new Types.ObjectId(userId)
@@ -427,12 +379,7 @@ const dashboardController = {
             if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user is not found");
             if(!storeId || !isValidObjectId(storeId)) return response.notFound(res, "store is not found");
 
-            const today = new Date();
-            today.setUTCHours(17, 0, 0, 0);
-            today.setUTCDate(today.getUTCDate() - 1);
-
-            const tomorrow = new Date();
-            tomorrow.setUTCHours(16, 59, 59, 999)
+            const {start, end} = todayRangeWIB();
 
             const result = await ModelOrder.aggregate([
                 {
@@ -441,8 +388,8 @@ const dashboardController = {
                         cashierId: new Types.ObjectId(userId),
                         status: "paid",
                         createdAt: {
-                            $gte: today,
-                            $lte: tomorrow
+                            $gte: start,
+                            $lte: end
                         }
                     }
                 },
@@ -491,12 +438,7 @@ const dashboardController = {
             if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user is not found");
             if(!storeId || !isValidObjectId(storeId)) return response.notFound(res, "store is not found");
 
-            const today = new Date();
-            today.setUTCHours(17, 0, 0, 0);
-            today.setUTCDate(today.getUTCDate() - 1);
-
-            const tomorrow = new Date();
-            tomorrow.setUTCHours(16, 59, 59, 999)
+            const {start, end} = todayRangeWIB();
 
             const result = await ModelOrder.aggregate([
                 {
@@ -505,8 +447,8 @@ const dashboardController = {
                         cashierId: new Types.ObjectId(userId),
                         status: "paid",
                         createdAt: {
-                            $gte: today,
-                            $lte: tomorrow
+                            $gte: start,
+                            $lte: end
                         }
                     }
                 },
