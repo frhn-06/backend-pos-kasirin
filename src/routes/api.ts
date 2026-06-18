@@ -125,6 +125,8 @@ routerApi.get("/dashboard/cashier-top-products", [authMiddleware, aclMiddleware(
 
 routerApi.get("/report/sales", [authMiddleware, aclMiddleware(["owner"])], reportController.sales);
 
+routerApi.get("/report/product", [authMiddleware, aclMiddleware(["owner"])], reportController.product);
+
 
 
 
