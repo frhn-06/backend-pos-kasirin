@@ -10,6 +10,7 @@ import mediaController from '../controller/media.controler';
 import orderController from '../controller/order.controller';
 import dashboardController from '../controller/dashboard.controller';
 import reportController from '../controller/report.controller';
+import exportController from '../controller/export.controller';
 
 const routerApi = express.Router();
 
@@ -128,6 +129,11 @@ routerApi.get("/report/sales", [authMiddleware, aclMiddleware(["owner"])], repor
 routerApi.get("/report/product", [authMiddleware, aclMiddleware(["owner"])], reportController.product);
 
 
+
+
+routerApi.get("/export/excel-sales", [authMiddleware, aclMiddleware(["owner"])], exportController.excelSales);
+
+routerApi.get("/export/excel-product", [authMiddleware, aclMiddleware(["owner"])], exportController.excelProduct);
 
 
 export default routerApi;
