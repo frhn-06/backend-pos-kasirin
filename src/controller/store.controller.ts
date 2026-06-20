@@ -49,7 +49,7 @@ const storeController = {
     findStoreByUser: async(req:IReqUser, res:Response) => {
         try {
             const userId = req.user?.id;
-            if(!isValidObjectId(userId)) return response.unauthorized(res);
+            if(!userId || !isValidObjectId(userId)) return response.unauthorized(res);
 
             const user = await ModelUser.findById(userId);
             if(!user?.storeId) return response.notFound(res, "store not found");
@@ -66,15 +66,17 @@ const storeController = {
     update: async(req:IReqUser, res:Response) => {
         try {
             const {storeId} = req.params;
-            if(!isValidObjectId(storeId)) return response.notFound(res, "store is not found");            
+            if(!storeId || !isValidObjectId(storeId)) return response.notFound(res, "store is not found");            
 
             const userId = req.user?.id;
-            if(!isValidObjectId(userId)) return response.unauthorized(res);
+            if(!userId || !isValidObjectId(userId)) return response.unauthorized(res);
 
             const result = await ModelStore.findOneAndUpdate({
                 ownerId: userId as Types.ObjectId,
                 _id: storeId
             }, req.body, {new:true});
+
+            if(!result) return response.notFound(res, "store is not found");
 
             response.success(res, result, "succoss to update store");
         } catch(error) {
