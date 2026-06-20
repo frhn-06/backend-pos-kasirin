@@ -51,10 +51,10 @@ const storeController = {
             const userId = req.user?.id;
             if(!userId || !isValidObjectId(userId)) return response.unauthorized(res);
 
-            const user = await ModelUser.findById(userId);
-            if(!user?.storeId) return response.notFound(res, "store not found");
+            const storeId = req.user?.storeId;
+            if(!storeId || !isValidObjectId(storeId)) return response.notFound(res, "store is not found");
 
-            const result = await ModelStore.findById(user.storeId);
+            const result = await ModelStore.findById(storeId);
             if(!result) return response.notFound(res, "store not found");
 
             response.success(res, result, "success to find a store by user")
