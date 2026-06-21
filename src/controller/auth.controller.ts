@@ -144,6 +144,26 @@ const authController = {
         } catch(error) {
             response.error(res, error, "failed to find user cashier");
         }
+    },
+
+    findUserById: async (req:IReqUser, res:Response) => {
+        try {
+            const userId = req.user?.id;
+            if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user not found");
+
+            const {id} = req.params;
+            if(!id || !isValidObjectId(id)) return response.notFound(res, "user not found");
+
+            if(id !== String(userId)) return response.notFound(res, "user not found");
+
+            const result = await ModelUser.findById(userId);
+
+            if(!result) return response.notFound(res, "user not found");
+
+            response.success(res, result, "success to find user");
+        } catch(error) {
+            response.error(res, error, "failed to find user");
+        }
     }
 }
 
