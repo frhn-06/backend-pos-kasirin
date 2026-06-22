@@ -82,9 +82,9 @@ routerApi.delete("/product/:productId", [authMiddleware, aclMiddleware(["owner"]
 
 
 
-routerApi.post("/media/upload-single", [authMiddleware, aclMiddleware(["owner"]), mediaMiddleware.single("file")], mediaController.uploadSingle);
+routerApi.post("/media/upload-single", [authMiddleware, aclMiddleware(["owner", "cashier"]), mediaMiddleware.single("file")], mediaController.uploadSingle);
 
-routerApi.delete("/media/remove-single", [authMiddleware, aclMiddleware(["owner"])], mediaController.removeSingle);
+routerApi.delete("/media/remove-single", [authMiddleware, aclMiddleware(["owner", "cashier"])], mediaController.removeSingle);
 
 
 
