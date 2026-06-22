@@ -164,6 +164,36 @@ const authController = {
         } catch(error) {
             response.error(res, error, "failed to find user");
         }
+    },
+
+    update: async (req:IReqUser,res:Response) => {
+        try{
+            const userId = req.user?.id;
+            if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user not found");
+
+            const {fullName, userName, avatar} = req.body;
+
+            const payload : any = {}
+
+            if(fullName) payload.fullName = fullName;
+            if(userName) payload.userName = userName;
+            if(avatar) payload.avatar = avatar;
+
+            const result = await ModelUser.findOneAndUpdate({
+                _id: userId,
+                isActive: true
+            }, {
+                ...payload
+            }, {
+                new: true
+            })
+
+            if(!result) return response.notFound(res, "user not found");
+
+            response.success(res, result, "success to update user");
+        }catch(error) {
+            response.error(res, error, "failed to update user");
+        }
     }
 }
 
