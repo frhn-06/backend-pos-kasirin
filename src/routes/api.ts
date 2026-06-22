@@ -31,7 +31,7 @@ routerApi.put("/auth/update-user", [authMiddleware, aclMiddleware(["owner", "cas
 
 routerApi.get("/user/:storeId/cashier", [authMiddleware, aclMiddleware(["owner"])], authController.findUserCashier);
 
-routerApi.get("/user/:id/profile", [authMiddleware, aclMiddleware(["owner", "cashier"])], authController.findUserById);
+routerApi.get("/user/my-profile", [authMiddleware, aclMiddleware(["owner", "cashier"])], authController.findMyUser);
 
 
 

@@ -146,15 +146,10 @@ const authController = {
         }
     },
 
-    findUserById: async (req:IReqUser, res:Response) => {
+    findMyUser: async (req:IReqUser, res:Response) => {
         try {
             const userId = req.user?.id;
             if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user not found");
-
-            const {id} = req.params;
-            if(!id || !isValidObjectId(id)) return response.notFound(res, "user not found");
-
-            if(id !== String(userId)) return response.notFound(res, "user not found");
 
             const result = await ModelUser.findById(userId);
 
