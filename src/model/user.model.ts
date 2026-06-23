@@ -22,12 +22,12 @@ const passwordYup = yup
  
 const confirmPassowrdYup = yup
     .string()
-    .oneOf([yup.ref("password")], "konfirmasi password tidak sama")
+    .oneOf([yup.ref("newPassword")], "konfirmasi password tidak sama")
     .required()
 
 export const PasswordDTO = yup.object({
     password: passwordYup,
-    confirmPassowrd: confirmPassowrdYup
+    confirmPassword: confirmPassowrdYup
 })
 
 export const UserDTO = yup.object({
