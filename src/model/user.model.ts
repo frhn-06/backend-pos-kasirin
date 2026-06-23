@@ -1,23 +1,34 @@
 import mongoose, { Types } from 'mongoose';
 import * as yup from 'yup';
 import encrypt from '../utils/encrypt';
-import { truncateSync } from 'fs';
 import { renderHtml, sendMail } from '../utils/nodemailer/mail';
 import { CLIENT_HOST, MAIL_ME } from '../utils/env';
 
 
-const passwordYup = yup.string().min(3, "minimal 3 caracter").test("angka" , "password harus mengandung angka", (value) => {
+const passwordYup = yup
+    .string()
+    .min(3, "minimal 3 caracter")
+    .test("angka" , "password harus mengandung angka", (value) => {
         if(!value) return false;
         const lolos = /^(?=.*\d)/.test(value || "");
         return lolos;
-    }).test("kapital", "password harus mengandung huruf kapital", (value) => {
+    })
+    .test("kapital", "password harus mengandung huruf kapital", (value) => {
         if(!value) return false;
         const lolos = /^(?=.*[A-Z])/.test(value || "");
         return lolos
-    }).required()
+    })
+    .required()
  
-const confirmPassowrdYup = yup.string().oneOf([yup.ref("password")], "konfirmasi password tidak sama").required()
+const confirmPassowrdYup = yup
+    .string()
+    .oneOf([yup.ref("password")], "konfirmasi password tidak sama")
+    .required()
 
+export const PasswordDTO = yup.object({
+    password: passwordYup,
+    confirmPassowrd: confirmPassowrdYup
+})
 
 export const UserDTO = yup.object({
     userName: yup.string().required(),

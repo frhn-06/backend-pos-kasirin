@@ -29,6 +29,8 @@ routerApi.post("/auth/create-user", [authMiddleware, aclMiddleware(["owner"])], 
 
 routerApi.put("/auth/update-user", [authMiddleware, aclMiddleware(["owner", "cashier"])], authController.update);
 
+routerApi.put("/auth/update-password", [authMiddleware, aclMiddleware(["owner", "cashier"])], authController.updatePassword);
+
 routerApi.get("/user/:storeId/cashier", [authMiddleware, aclMiddleware(["owner"])], authController.findUserCashier);
 
 routerApi.get("/user/my-profile", [authMiddleware, aclMiddleware(["owner", "cashier"])], authController.findMyUser);

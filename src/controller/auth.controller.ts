@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import ModelUser, { IRegisterForm, LoginDTO, UserDTO } from "../model/user.model";
+import ModelUser, { IRegisterForm, LoginDTO, PasswordDTO, UserDTO } from "../model/user.model";
 import response from "../utils/response";
 import { IReqUser, signIn } from "../utils/jwt";
 import encrypt from "../utils/encrypt";
@@ -188,6 +188,34 @@ const authController = {
             response.success(res, result, "success to update user");
         }catch(error) {
             response.error(res, error, "failed to update user");
+        }
+    },
+
+    updatePassword: async (req:IReqUser, res: Response) => {
+        try {
+            const userId = req.user?.id;
+            if(!userId || !isValidObjectId(userId)) return response.notFound(res, "user not found");
+
+            const {oldPassword, newPassword, confirmNewPassword} = req.body;
+
+            const user = await ModelUser.findById(userId);
+            if(!user) return response.notFound(res, "user is not found");
+
+            const matchPasssword = encrypt(oldPassword) === user.password;
+
+            if(!matchPasssword) return response.error(res, "error", "your password is wrong");
+
+            const validate = await PasswordDTO.validate({
+                password: newPassword,
+                confirmPassword: confirmNewPassword
+            })
+
+            user.password = validate.password;
+            await user.save();
+
+            response.success(res, user, "success to update password")
+        } catch(error) {
+            response.error(res, error, "failed to update password");
         }
     }
 }
