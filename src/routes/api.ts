@@ -25,13 +25,13 @@ routerApi.post("/auth/login", authController.login);
 
 routerApi.get("/auth/me", [authMiddleware], authController.getMeByToken);
 
-routerApi.post("/auth/create-user", [authMiddleware, aclMiddleware(["owner"])], authController.createUserCashier);
+routerApi.post("/auth/create-cashier", [authMiddleware, aclMiddleware(["owner"])], authController.createUserCashier);
 
 routerApi.put("/auth/update-user", [authMiddleware, aclMiddleware(["owner", "cashier"])], authController.update);
 
 routerApi.put("/auth/update-password", [authMiddleware, aclMiddleware(["owner", "cashier"])], authController.updatePassword);
 
-routerApi.get("/user/:storeId/cashier", [authMiddleware, aclMiddleware(["owner"])], authController.findUserCashier);
+routerApi.get("/user/cashier/find", [authMiddleware, aclMiddleware(["owner"])], authController.findUserCashier);
 
 routerApi.get("/user/my-profile", [authMiddleware, aclMiddleware(["owner", "cashier"])], authController.findMyUser);
 
