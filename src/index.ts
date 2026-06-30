@@ -3,6 +3,7 @@ import database from './utils/database';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import routerApi from './routes/api';
+import docs from './docs/route';
 
 
 
@@ -24,6 +25,8 @@ const init = async () => {
                 name: "aplikasi pos sass"
             })
         })
+
+        docs(app);
 
         app.use('/api', routerApi);
         
