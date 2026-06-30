@@ -1,4 +1,6 @@
 import swaggerJSDoc from "swagger-jsdoc";
+import fs from "fs";
+import path from "path";
 
 const options: swaggerJSDoc.Options = {
     definition: {
@@ -209,5 +211,10 @@ const options: swaggerJSDoc.Options = {
     apis: ["./src/routes/**/*.ts"],
 };
 const swaggerSpec = swaggerJSDoc(options);
+
+fs.writeFileSync(
+  path.join(__dirname, "swagger-output.json"),
+  JSON.stringify(swaggerSpec, null, 2)
+);
 
 export default swaggerSpec;
