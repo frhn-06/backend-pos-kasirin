@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "POS SaaS Kasirin API",
     "version": "1.0.0",
+    "title": "POS SaaS Kasirin API",
     "description": "REST API Documentation for POS SaaS Kasirin"
   },
   "servers": [
@@ -12,15 +12,1148 @@
     },
     {
       "url": "https://backend-pos-kasirin.vercel.app/api",
-      "description": "Development Server"
+      "description": "Deployment Server"
     }
   ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/activation": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActivationRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/create-cashier": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/update-user": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/update-password": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePasswordUserRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/cashier/find": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/user/my-profile": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/category": {
+      "post": {
+        "tags": [
+          "Category"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/category/{categoryId}": {
+      "get": {
+        "tags": [
+          "Category"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/category/{categoryId}/update": {
+      "put": {
+        "tags": [
+          "Category"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/category/{categoryId}/remove": {
+      "delete": {
+        "tags": [
+          "Category"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/store": {
+      "post": {
+        "tags": [
+          "Store"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Store"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/store/{storeId}": {
+      "put": {
+        "tags": [
+          "Store"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/product/{productId}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductRequest"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Product"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/media/upload-single": {
+      "post": {
+        "tags": [
+          "Media"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "requied": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/media/remove-single": {
+      "delete": {
+        "tags": [
+          "Media"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/order": {
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paymentMethod",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cashierId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/order/{orderId}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/order/{orderId}/cancel": {
+      "patch": {
+        "tags": [
+          "Order"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/order/{orderId}/uncancel": {
+      "patch": {
+        "tags": [
+          "Order"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dashboard/owner-summary": {
+      "get": {
+        "tags": [
+          "Dashboard Owner"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/dashboard/sales-trend": {
+      "get": {
+        "tags": [
+          "Dashboard Owner"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/dashboard/owner-top-products": {
+      "get": {
+        "tags": [
+          "Dashboard Owner"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/dashboard/owner-last-orders": {
+      "get": {
+        "tags": [
+          "Dashboard Owner"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/dashboard/cashier-summary": {
+      "get": {
+        "tags": [
+          "Dashboard Cashier"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/dashboard/cashier-last-orders": {
+      "get": {
+        "tags": [
+          "Dashboard Cashier"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/dashboard/payment-summary": {
+      "get": {
+        "tags": [
+          "Dashboard Cashier"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/dashboard/cashier-top-products": {
+      "get": {
+        "tags": [
+          "Dashboard Cashier"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/report/sales": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/report/product": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/export/excel-sales": {
+      "get": {
+        "tags": [
+          "Export"
+        ],
+        "description": "",
+        "produces": [
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ],
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/export/excel-product": {
+      "get": {
+        "tags": [
+          "Export"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    }
+  },
   "components": {
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+        "scheme": "bearer"
       }
     },
     "schemas": {
@@ -29,23 +1162,23 @@
         "properties": {
           "email": {
             "type": "string",
-            "example": "example@gmail.com"
+            "example": "@gmail.com"
           },
           "fullName": {
             "type": "string",
-            "example": "full name"
+            "example": "namalengkap"
           },
           "userName": {
             "type": "string",
-            "example": "user name"
+            "example": "username"
           },
           "password": {
             "type": "string",
-            "example": "***"
+            "example": "p"
           },
           "confirmPassword": {
             "type": "string",
-            "example": "***"
+            "example": "confirm p"
           }
         }
       },
@@ -63,11 +1196,11 @@
         "properties": {
           "identifier": {
             "type": "string",
-            "example": "example@gmail.com / user name"
+            "example": "alwanbocil@gmail.com / username"
           },
           "password": {
             "type": "string",
-            "example": "***"
+            "example": "p"
           }
         }
       },
@@ -76,20 +1209,28 @@
         "properties": {
           "fullName": {
             "type": "string",
-            "example": "full name"
+            "example": "namalengkap"
           },
           "userName": {
             "type": "string",
-            "example": "user name"
+            "example": "username"
           }
         }
       },
       "UpdatePasswordUserRequest": {
         "type": "object",
         "properties": {
-          "password": {
+          "oldPassword": {
             "type": "string",
-            "example": "***"
+            "example": "p lama"
+          },
+          "newPassword": {
+            "type": "string",
+            "example": "p baru"
+          },
+          "confirmNewPassword": {
+            "type": "string",
+            "example": "confirm p baru"
           }
         }
       },
@@ -98,9 +1239,9 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "store name"
+            "example": "nama toko"
           },
-          "adderss": {
+          "address": {
             "type": "string",
             "example": "Jl. sudirman"
           },
@@ -110,11 +1251,11 @@
           },
           "description": {
             "type": "string",
-            "example": "description"
+            "example": ""
           },
           "timeZone": {
             "type": "string",
-            "example": "time zone"
+            "example": ""
           }
         }
       },
@@ -123,11 +1264,11 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "category name"
+            "example": "nama kategori"
           },
           "img": {
             "type": "string",
-            "example": "foto.png"
+            "example": ".png"
           }
         }
       },
@@ -136,11 +1277,11 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "category name"
+            "example": "nama produk"
           },
           "img": {
             "type": "string",
-            "example": "foto.png"
+            "example": ".png"
           },
           "price": {
             "type": "number",
@@ -152,7 +1293,7 @@
           },
           "description": {
             "type": "string",
-            "example": "description"
+            "example": ""
           }
         }
       },
@@ -170,22 +1311,17 @@
                 },
                 "qty": {
                   "type": "number",
-                  "example": 1
+                  "example": 2
                 }
               }
             }
           },
           "paidAmount": {
             "type": "number",
-            "example": 50000
+            "example": 1000
           },
           "paymentMethod": {
             "type": "string",
-            "enum": [
-              "cash",
-              "qris",
-              "transfer"
-            ],
             "example": "cash"
           }
         }
@@ -200,1238 +1336,5 @@
         }
       }
     }
-  },
-  "paths": {
-    "/auth/register": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Register new user",
-        "description": "create a new owner or cashier account",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Register success"
-          },
-          "400": {
-            "description": "Validation failed"
-          },
-          "409": {
-            "description": "Email or username already exists"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/auth/ActivationRequest": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Activation user",
-        "description": "Activation for user owner or cashier",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ActivationRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Activation success"
-          },
-          "400": {
-            "description": "Invalid activation code"
-          },
-          "404": {
-            "description": "User not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/auth/login": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Login user",
-        "description": "login for user owner or cashier",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Login success"
-          },
-          "400": {
-            "description": "Validation failed"
-          },
-          "409": {
-            "description": "Email or username already exists"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/auth/me": {
-      "get": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Find user by token",
-        "description": "Find user must be a token",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Find me success"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/auth/create-cashier": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Create cashier",
-        "description": "Create a cashier to be a staff",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Create cashier success"
-          },
-          "400": {
-            "description": "Validation failed"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "409": {
-            "description": "Username or email already exicts"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/auth/update-user": {
-      "put": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Update user",
-        "description": "Update info user from full name and user name",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateUserRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Update user success"
-          },
-          "400": {
-            "description": "Validation failed"
-          },
-          "404": {
-            "description": "User not found"
-          },
-          "409": {
-            "description": "Username or email already exicts"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/auth/update-password": {
-      "put": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Update password",
-        "description": "Update password user",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdatePasswordUserRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Update password success"
-          },
-          "400": {
-            "description": "Validation failed"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "409": {
-            "description": "Username or email already exicts"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/user/cashier/find": {
-      "get": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Find cashier",
-        "description": "Find a cashier user",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Find cashier success"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "User not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/user/my-profile": {
-      "get": {
-        "tags": [
-          "Auth"
-        ],
-        "summary": "Find user",
-        "description": "Find user without token",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Find my profile success"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/category": {
-      "post": {
-        "tags": [
-          "Category"
-        ],
-        "summary": "Create category",
-        "description": "Create a category for product field",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CategoryRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Category"
-        ],
-        "summary": "Find categories",
-        "description": "Find all categories",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/category/{id}": {
-      "get": {
-        "tags": [
-          "Category"
-        ],
-        "summary": "Find category",
-        "description": "Find a category by id",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/category/{id}/update": {
-      "put": {
-        "tags": [
-          "Category"
-        ],
-        "summary": "Update category",
-        "description": "Update a category for product field",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CategoryRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/category/{id}/remove": {
-      "delete": {
-        "tags": [
-          "Category"
-        ],
-        "summary": "Delete category",
-        "description": "Delete a category from categories",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/store": {
-      "post": {
-        "tags": [
-          "Store"
-        ],
-        "summary": "Create store",
-        "description": "Create store as application core",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StoreRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Store"
-        ],
-        "summary": "Find store",
-        "description": "Find store by owner",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/store/{id}": {
-      "put": {
-        "tags": [
-          "Store"
-        ],
-        "summary": "Update store",
-        "description": "Update store of owner",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/StoreRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/product": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Create Product",
-        "description": "Create Product or menu",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Find Products",
-        "description": "Find all Products or menus",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "page",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "search",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "category",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/product/{id}": {
-      "get": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Find Products",
-        "description": "Find all Products or menus",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Find Products",
-        "description": "Find all Products or menus",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Find Products",
-        "description": "Find all Products or menus",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/media/upload-single": {
-      "post": {
-        "tags": [
-          "Media"
-        ],
-        "summary": "Upload single",
-        "description": "Upload a media",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "example": "file"
-                  },
-                  "file": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/media/remove-single": {
-      "delete": {
-        "tags": [
-          "Media"
-        ],
-        "summary": "Remove single",
-        "description": "Remove a media",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RemoveMediaRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/order": {
-      "post": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Create Order",
-        "description": "Create order for sales",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": "true,",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OrderRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Find Orders",
-        "description": "Find all orders",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "page",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "search",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "status",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "paymentMethod",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "cashierId",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "start",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "end",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/order/{id}": {
-      "get": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Find Order",
-        "description": "Find one order",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/order/{id}/cancel": {
-      "patch": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Cancel Order",
-        "description": "Cancel one order",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/order/{id}/uncancel": {
-      "patch": {
-        "tags": [
-          "Order"
-        ],
-        "summary": "Uncancel Order",
-        "description": "Uncancel one order",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/dashboard/owner-summary": {
-      "get": {
-        "tags": [
-          "Dashboard owner"
-        ],
-        "summary": "Dashboard summary",
-        "description": "Info Summary of sales, averege, product",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/dashboard/sales-trend": {
-      "get": {
-        "tags": [
-          "Dashboard owner"
-        ],
-        "summary": "Sales trend",
-        "description": "Info sales trend in 1 week",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/dashboard/owner-top-products": {
-      "get": {
-        "tags": [
-          "Dashboard owner"
-        ],
-        "summary": "Last orders",
-        "description": "Info last orders",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/dashboard/cashier-summary": {
-      "get": {
-        "tags": [
-          "Dashboard cashier"
-        ],
-        "summary": "Dashboard summary",
-        "description": "Info Summary of sales, averege, product",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/dashboard/cashier-last-orders": {
-      "get": {
-        "tags": [
-          "Dashboard cashier"
-        ],
-        "summary": "Last orders",
-        "description": "Info last orders",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/dashboard/payment-summary": {
-      "get": {
-        "tags": [
-          "Dashboard cashier"
-        ],
-        "summary": "Payment summary",
-        "description": "Info top much products ordered",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/dashboard/cashier-top-products": {
-      "get": {
-        "tags": [
-          "Dashboard cashier"
-        ],
-        "summary": "Top products",
-        "description": "Info top products ordered",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/report/sales": {
-      "get": {
-        "tags": [
-          "Report"
-        ],
-        "summary": "Report sales",
-        "description": "Report of sales",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "start",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "end",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/report/product": {
-      "get": {
-        "tags": [
-          "Report"
-        ],
-        "summary": "Report products",
-        "description": "Report of products",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "start",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "end",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/export/excel-sales": {
-      "get": {
-        "tags": [
-          "Export excel"
-        ],
-        "summary": "Export excel sales",
-        "description": "Export excel for sales",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "start",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "end",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    },
-    "/export/excel-product": {
-      "get": {
-        "tags": [
-          "Export excel"
-        ],
-        "summary": "Export excel product",
-        "description": "Export excel for product",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "start",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "end",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "success request"
-          }
-        }
-      }
-    }
-  },
-  "tags": []
+  }
 }

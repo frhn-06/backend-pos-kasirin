@@ -133,7 +133,7 @@ const orderController = {
             const role = req.user?.role;
 
             interface TypeReqQuery {
-                page:string; limit: string; search: string; status: string; paymentmethod: string; cashierid: string; start: string; end: string;
+                page:string | number; limit: string | number; search: string; status: string; paymentmethod: string; cashierid: string; start: string; end: string;
             }
             
             const {page, limit, search, status, paymentmethod, cashierid, start, end} = req.query as unknown as TypeReqQuery;
