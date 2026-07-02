@@ -4,6 +4,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import routerApi from './routes/api';
 import docs from './docs/route';
+import errorMiddleware from './middleware/error.middleware';
 
 
 
@@ -29,6 +30,8 @@ const init = async () => {
         docs(app);
 
         app.use('/api', routerApi);
+
+        app.use(errorMiddleware.serverError());
         
         app.listen(port, () => {
             console.log("server runnning on localhost prot : " + port);
