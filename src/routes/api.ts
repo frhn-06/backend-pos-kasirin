@@ -407,6 +407,13 @@ routerApi.delete("/media/remove-single", [authMiddleware, aclMiddleware(["owner"
     #swagger.security = [{
       "bearerAuth": []
     }]
+    #swagger.requestBody = {
+      content: {
+        "application/json": {
+          $ref: '#/components/schema/RemoveMediaRequest'
+        }
+      }
+    }
  */
 );
 // /////////////////////////////////////////////////////////////////////////////////////////////////
