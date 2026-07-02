@@ -7,21 +7,26 @@ interface IReqUser extends Request {
 }
 
 const authMiddleware = async (req:Request, res:Response, next: NextFunction) => {
-    const authorize = req.headers.authorization;
+    try {
 
-    if(!authorize) return response.unauthorized(res);
-
-    const [bearer, token] = authorize.split(" ");
-
-    if(bearer !== "Bearer") return response.unauthorized(res);
-
-    if(!token) return response.unauthorized(res);
-
-    const result = getUserByToken(token);
-
-    (req as unknown as IReqUser).user = result
+        const authorize = req.headers.authorization;
     
-    next();
+        if(!authorize) return response.unauthorized(res);
+    
+        const [bearer, token] = authorize.split(" ");
+    
+        if(bearer !== "Bearer") return response.unauthorized(res);
+    
+        if(!token) return response.unauthorized(res);
+    
+        const result = getUserByToken(token);
+    
+        (req as unknown as IReqUser).user = result
+        
+        next();
+    } catch(error) {
+        next(error);
+    }
 }
 
 export default authMiddleware;
