@@ -15,7 +15,7 @@ interface IReqUser extends Request {
 
 const signIn = (user: IUserToken) => {
     return jwt.sign(user, SECRET, {
-        expiresIn: "1m"
+        expiresIn: "1d"
     });
 }
 
