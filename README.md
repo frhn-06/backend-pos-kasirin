@@ -125,23 +125,18 @@ Buat file `.env` pada root project.
 Contoh:
 
 ```env
-PORT=
-DATABASE_URL=
-JWT_SECRET=
+MONGO_URL=
+
+SECRET=
+
+MAIL_PASSWORD=
+MAIL_ME=
+CLIENT_HOST=
 
 CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
-
-MAIL_HOST=
-MAIL_PORT=
-MAIL_USER=
-MAIL_PASSWORD=
+CLOUDINARY_API_KEY=
 ```
-
-> Sesuaikan nama environment variable dengan konfigurasi yang digunakan pada project.
-
-**Jangan memasukkan nilai secret atau credential asli ke dalam repository.**
 
 ## 📚 About This Project
 
