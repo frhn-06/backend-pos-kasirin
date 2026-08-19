@@ -77,7 +77,7 @@ Pendekatan ini memungkinkan aplikasi dikembangkan sebagai satu sistem yang dapat
 API tersedia dan dapat dipelajari melalui **Swagger API Documentation**.
 
 ```text
-[https://backend-pos-kasirin.vercel.app/api-docs]
+https://backend-pos-kasirin.vercel.app/api-docs
 ```
 
 Swagger digunakan untuk mendokumentasikan endpoint API serta membantu proses testing dan eksplorasi API.
