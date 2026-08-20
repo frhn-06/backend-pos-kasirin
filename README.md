@@ -101,7 +101,7 @@ Clone repository:
 Masuk ke folder project:
 
 ```bash
-cd pos-kasirin-backend
+cd backend-pos-kasirin
 ```
 
 Install dependencies:
